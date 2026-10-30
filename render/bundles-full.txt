@@ -1,0 +1,35 @@
+# 풀판(공식 디자이너와 같은 데이터 소스·출력 형식)에 더 넣는 번들 — bundles.txt(경량판) 뒤에 붙여서 씀 (빌드 -Pedition=full)
+# 데이터 소스: Flat File(CSV)·Excel·MongoDB·Cassandra·Hive·XML·Web Services·샘플 DB(Classic Models, 내장 Derby), 출력 형식: DOCX
+# 한 줄 형식은 bundles.txt와 같음
+org.eclipse.birt.axis.overlay,4.8.0.v201806261756,org.eclipse.birt.axis.overlay_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.data.oda.mongodb,4.8.0.v201806261756,org.eclipse.birt.data.oda.mongodb_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.data.oda.mongodb.ui,4.8.0.v201806261756,org.eclipse.birt.data.oda.mongodb.ui_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.me.prettyprint.hector,4.8.0.v201806261756,org.eclipse.birt.me.prettyprint.hector_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.excel,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.excel_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.excel.ui,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.excel.ui_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.hive,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.hive_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.hive.ui,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.hive.ui_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.xml,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.xml_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.xml.ui,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.xml.ui_4.8.0.v201806261756.jar,4,false
+org.apache.axis,1.4.0.v201411182030,org.apache.axis_1.4.0.v201411182030,4,false
+org.eclipse.orbit.mongodb,3.2.2.v20170222-2110,org.eclipse.orbit.mongodb_3.2.2.v20170222-2110.jar,4,false
+org.apache.poi,3.9.0.v201405241750,org.apache.poi_3.9.0.v201405241750.jar,4,false
+org.apache.derby,10.11.1.1_v201605202053,org.apache.derby_10.11.1.1_v201605202053.jar,4,false
+org.eclipse.datatools.enablement.oda.xml,1.3.0.201603142002,org.eclipse.datatools.enablement.oda.xml_1.3.0.201603142002.jar,4,false
+org.eclipse.datatools.enablement.oda.xml.ui,1.3.0.201603142002,org.eclipse.datatools.enablement.oda.xml.ui_1.3.0.201603142002.jar,4,false
+org.eclipse.datatools.connectivity.oda.flatfile,3.2.0.201603142002,org.eclipse.datatools.connectivity.oda.flatfile_3.2.0.201603142002.jar,4,false
+org.eclipse.datatools.connectivity.oda.flatfile.ui,3.2.0.201603142002,org.eclipse.datatools.connectivity.oda.flatfile.ui_3.2.0.201603142002.jar,4,false
+org.eclipse.birt.report.data.oda.sampledb,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.sampledb_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.sampledb.ui,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.sampledb.ui_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.jdbc.dbprofile.sampledb,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.jdbc.dbprofile.sampledb_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.data.oda.jdbc.dbprofile.sampledb.ui,4.8.0.v201806261756,org.eclipse.birt.report.data.oda.jdbc.dbprofile.sampledb.ui_4.8.0.v201806261756.jar,4,false
+org.eclipse.datatools.connectivity.apache.derby,1.1.0.201603142002,org.eclipse.datatools.connectivity.apache.derby_1.1.0.201603142002.jar,4,false
+org.eclipse.datatools.connectivity.apache.derby.ui,1.1.0.201603142002,org.eclipse.datatools.connectivity.apache.derby.ui_1.1.0.201603142002.jar,4,false
+org.eclipse.datatools.connectivity.apache.derby.dbdefinition,1.1.0.201603142002,org.eclipse.datatools.connectivity.apache.derby.dbdefinition_1.1.0.201603142002.jar,4,false
+org.eclipse.datatools.enablement.oda.ws,1.3.0.201603142002,org.eclipse.datatools.enablement.oda.ws_1.3.0.201603142002.jar,4,false
+org.eclipse.datatools.enablement.oda.ws.ui,1.3.0.201603142002,org.eclipse.datatools.enablement.oda.ws.ui_1.3.0.201603142002.jar,4,false
+org.eclipse.birt.report.engine.emitter.docx,4.8.0.v201806261756,org.eclipse.birt.report.engine.emitter.docx_4.8.0.v201806261756.jar,4,false
+org.eclipse.birt.report.engine.emitter.config.docx,4.8.0.v201806261756,org.eclipse.birt.report.engine.emitter.config.docx_4.8.0.v201806261756.jar,4,false
+org.eclipse.datatools.modelbase.derby,1.1.0.201603142002,org.eclipse.datatools.modelbase.derby_1.1.0.201603142002.jar,4,false
+org.eclipse.datatools.connectivity.sqm.server.ui,1.2.0.201603142002,org.eclipse.datatools.connectivity.sqm.server.ui_1.2.0.201603142002.jar,4,false
+org.eclipse.datatools.modelbase.sql.edit,1.1.0.201603142002,org.eclipse.datatools.modelbase.sql.edit_1.1.0.201603142002.jar,4,false

@@ -1,0 +1,83 @@
+<idea-plugin>
+    <id>io.github.intellijbirt</id>
+    <name>Report Designer for BIRT</name>
+    <vendor url="https://github.com/jinwovo/intelliJ-birt">intelliJ-birt</vendor>
+    <description><![CDATA[
+    Unofficial plugin: edit Eclipse BIRT 4.8 report files (rptdesign) in IntelliJ IDEA with the original Eclipse BIRT designer — no Eclipse install needed.<br>
+    비공식 플러그인 — IntelliJ에서 BIRT 4.8 리포트(rptdesign)를 이클립스 BIRT 디자이너 그대로 편집하고 검사·미리보기까지 (이클립스·Java 8 별도 설치 불필요).
+    <ul>
+      <li>편집기 탭: Layout · Master Page · Script · XML Source, 도구 창: BIRT Property Editor · BIRT Data Explorer</li>
+      <li>구조 보기: 데이터 소스, 데이터셋(SQL·스크립트), 파라미터, 본문(표·라벨…)</li>
+      <li>데이터셋 SQL·스크립트에 SQL·JavaScript 문법 강조</li>
+      <li>검사: 저장할 때 BIRT 4.8 엔진으로 검사해서 오류 줄 표시, 파일 형식이 4.8과 다르면 경고</li>
+      <li>미리보기: 파라미터 입력 → PDF(기본 뷰어)·HTML(IDE 탭). 설정한 차단 DB에 접속하는 리포트는 실행하지 않음</li>
+    </ul>
+    Eclipse BIRT 디자이너 4.8 번들(EPL 등 각 번들의 라이선스)이 플러그인에 들어 있고, IntelliJ 내장 Java로 별도 프로세스에서 실행합니다.
+    DB 드라이버는 들어 있지 않으며 리포트 프로젝트의 WEB-INF/lib에서 찾습니다 (이클립스와 같음).
+    Eclipse·BIRT는 Eclipse Foundation의 상표이며, 이 플러그인은 Eclipse Foundation과 관계가 없습니다.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.xml</depends>
+    <depends optional="true" config-file="birt-intellilang.xml">org.intellij.intelliLang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="BIRT Report" implementationClass="io.github.intellijbirt.idea.BirtFileType" fieldName="INSTANCE"
+                  language="XML" extensions="rptdesign;rptlibrary;rpttemplate"/>
+        <!-- 아래 탭 (이클립스 디자이너처럼): Layout | Master Page | Script | XML Source -->
+        <fileEditorProvider implementation="io.github.intellijbirt.idea.BirtEditorProviders$Layout"/>
+        <fileEditorProvider implementation="io.github.intellijbirt.idea.BirtEditorProviders$MasterPage"/>
+        <fileEditorProvider implementation="io.github.intellijbirt.idea.BirtEditorProviders$Script"/>
+        <fileEditorProvider implementation="io.github.intellijbirt.idea.BirtEditorProviders$XmlSource"/>
+        <!-- 구조 보기 — 파일 형식별 기본 확장점 (2025.1~ 모든 버전에 있음) -->
+        <structureViewBuilder key="BIRT Report" factoryClass="io.github.intellijbirt.idea.BirtStructureViewProvider"/>
+        <externalAnnotator language="XML" implementationClass="io.github.intellijbirt.idea.BirtValidateAnnotator"/>
+        <applicationConfigurable parentId="tools" instance="io.github.intellijbirt.idea.BirtConfigurable"
+                                 id="io.github.intellijbirt.settings" displayName="BIRT 4.8"/>
+        <notificationGroup id="BIRT Tools" displayType="BALLOON"/>
+        <!-- 설계 화면 서버 (이클립스 BIRT 디자이너 4.8 코드를 별도 JVM으로 상주 실행) -->
+        <applicationService serviceImplementation="io.github.intellijbirt.idea.BirtDesignerServer"/>
+        <!-- 저장은 이클립스처럼: Ctrl+S로만, 저장 안 한 탭은 *, 닫을 때 물어봄 -->
+        <fileDocumentSynchronizationVetoer implementation="io.github.intellijbirt.idea.BirtSaving$Vetoer"/>
+        <editorTabTitleProvider implementation="io.github.intellijbirt.idea.BirtSaving$TabTitle"/>
+        <projectCloseHandler implementation="io.github.intellijbirt.idea.BirtSaving$CloseHandler" order="first"/>
+        <!-- 이클립스 BIRT 보조 창 (설계 화면이 열려 있을 때만 나타남) -->
+        <toolWindow id="BIRT Property Editor" anchor="bottom" icon="AllIcons.General.Settings"
+                    factoryClass="io.github.intellijbirt.idea.BirtViewWindows$PropertyEditor" doNotActivateOnStart="true"/>
+        <toolWindow id="BIRT Data Explorer" anchor="left" secondary="true" icon="AllIcons.Nodes.DataTables"
+                    factoryClass="io.github.intellijbirt.idea.BirtViewWindows$DataExplorer" doNotActivateOnStart="true"/>
+        <toolWindow id="BIRT Outline" anchor="right" icon="AllIcons.Toolwindows.ToolWindowStructure"
+                    factoryClass="io.github.intellijbirt.idea.BirtViewWindows$Outline" doNotActivateOnStart="true"/>
+        <toolWindow id="BIRT Resource Explorer" anchor="right" secondary="true" icon="AllIcons.Nodes.PpLib"
+                    factoryClass="io.github.intellijbirt.idea.BirtViewWindows$ResourceExplorer" doNotActivateOnStart="true"/>
+    </extensions>
+
+    <applicationListeners>
+        <listener class="io.github.intellijbirt.idea.BirtSaving$SavedListener"
+                  topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>
+    </applicationListeners>
+
+    <projectListeners>
+        <listener class="io.github.intellijbirt.idea.BirtSaving$ClosedListener"
+                  topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
+
+    <actions>
+        <group id="BirtTools.Group">
+            <separator/>
+            <action id="BirtTools.PreviewPdf" class="io.github.intellijbirt.idea.BirtActions$PreviewPdf"
+                    text="BIRT 미리보기 (PDF)" description="BIRT 4.8 엔진으로 PDF를 만들어 기본 뷰어로 엽니다"/>
+            <action id="BirtTools.PreviewHtml" class="io.github.intellijbirt.idea.BirtActions$PreviewHtml"
+                    text="BIRT 미리보기 (HTML)" description="BIRT 4.8 엔진으로 HTML을 만들어 IDE 탭으로 엽니다"/>
+            <action id="BirtTools.PreviewOther" class="io.github.intellijbirt.idea.BirtActions$PreviewOther"
+                    text="BIRT 미리보기 (다른 형식…)" description="DOCX·PPTX·ODT 등 이 BIRT 엔진이 만들 수 있는 형식으로 만들어 그 형식의 기본 프로그램으로 엽니다"/>
+            <action id="BirtTools.Validate" class="io.github.intellijbirt.idea.BirtActions$Validate"
+                    text="BIRT 검사" description="BIRT 4.8 모델 엔진으로 리포트를 검사합니다"/>
+            <action id="BirtTools.OpenInEclipse" class="io.github.intellijbirt.idea.BirtActions$OpenInEclipse"
+                    text="이클립스 BIRT 디자이너로 열기" description="설정한 이클립스(BIRT 디자이너)에서 이 리포트를 엽니다"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>

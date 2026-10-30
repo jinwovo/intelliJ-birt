@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BIRT 리포트의 데이터셋 SQL·스크립트에 문법 강조 (해당 언어 플러그인이 있을 때 — SQL은 Database Tools, JavaScript는 JavaScript 플러그인) -->
+<component name="LanguageInjectionConfiguration">
+    <injection language="SQL" injector-id="xml">
+        <display-name>BIRT 데이터셋 SQL (xml-property queryText)</display-name>
+        <place><![CDATA[xmlTag().withLocalName(string().equalTo("xml-property")).withAttributeValue("name", "queryText")]]></place>
+    </injection>
+    <injection language="JavaScript" injector-id="xml">
+        <display-name>BIRT 스크립트 (method)</display-name>
+        <place><![CDATA[xmlTag().withLocalName(string().equalTo("method"))]]></place>
+    </injection>
+</component>

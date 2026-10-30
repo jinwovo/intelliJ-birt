@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension id="app" point="org.eclipse.core.runtime.applications">
+      <application visible="true">
+         <run class="io.github.intellijbirt.render.App"/>
+      </application>
+   </extension>
+   <!-- 편집기 영역만 있는 화면 배치 (IntelliJ 탭 안에 끼워 넣을 편집기를 여는 숨긴 창).
+        편집기 자체는 BIRT IDE 번들(org.eclipse.birt.report.designer.ui.ide)이 등록한 것을 그대로 씀 -->
+   <extension point="org.eclipse.ui.perspectives">
+      <perspective id="io.github.intellijbirt.render.perspective" name="BIRT"
+            class="io.github.intellijbirt.render.EditorOnlyPerspective"/>
+   </extension>
+   <!-- 설계 화면의 DB 접속에 미리보기와 같은 DB 보호 (차단·허용 목록) — 드라이버 클래스마다 접속을 이 클래스가 만듦.
+        BIRT는 연결 공장을 드라이버 클래스 이름으로 찾으므로 흔히 쓰는 드라이버를 모두 등록 (여기 없는 드라이버는 보호 안 됨).
+        이름·주소 형식은 New Data Source의 드라이버 목록에 나옴 (드라이버 jar가 없으면 접속할 때 드라이버를 못 찾는다고 나옴) -->
+   <extension point="org.eclipse.birt.report.data.oda.jdbc.driverinfo">
+      <jdbcDriver driverClass="oracle.jdbc.OracleDriver" name="Oracle"
+            urlTemplate="jdbc:oracle:thin:@HOST:PORT:SID"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="oracle.jdbc.driver.OracleDriver" name="Oracle (old class name)"
+            urlTemplate="jdbc:oracle:thin:@HOST:PORT:SID"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.mysql.cj.jdbc.Driver" name="MySQL"
+            urlTemplate="jdbc:mysql://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.mysql.jdbc.Driver" name="MySQL (5.x)"
+            urlTemplate="jdbc:mysql://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="org.mariadb.jdbc.Driver" name="MariaDB"
+            urlTemplate="jdbc:mariadb://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="org.postgresql.Driver" name="PostgreSQL"
+            urlTemplate="jdbc:postgresql://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" name="Microsoft SQL Server"
+            urlTemplate="jdbc:sqlserver://HOST:PORT;databaseName=DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="net.sourceforge.jtds.jdbc.Driver" name="jTDS (SQL Server, Sybase)"
+            urlTemplate="jdbc:jtds:sqlserver://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.ibm.db2.jcc.DB2Driver" name="IBM Db2"
+            urlTemplate="jdbc:db2://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.sap.db.jdbc.Driver" name="SAP HANA"
+            urlTemplate="jdbc:sap://HOST:PORT"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="com.tmax.tibero.jdbc.TbDriver" name="Tibero"
+            urlTemplate="jdbc:tibero:thin:@HOST:PORT:DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="Altibase.jdbc.driver.AltibaseDriver" name="Altibase"
+            urlTemplate="jdbc:Altibase://HOST:PORT/DATABASE"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+      <jdbcDriver driverClass="cubrid.jdbc.driver.CUBRIDDriver" name="CUBRID"
+            urlTemplate="jdbc:cubrid:HOST:PORT:DATABASE:::"
+            connectionFactory="io.github.intellijbirt.render.GuardedConnectionFactory"/>
+   </extension>
+</plugin>
