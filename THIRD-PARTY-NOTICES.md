@@ -9,6 +9,7 @@ designer (BIRT build v201806261756). They are redistributed under their own lice
 - Each bundle contains its own `about.html` (and, where applicable, `about_files/` with license and notice files) stating its
   license and where its source code can be obtained. Those files are kept as-is.
 - No JDBC drivers are included.
+- `designer/java-modern.profile` (also `render/java-modern.profile` in the repository) is a modified copy of `JavaSE-1.8.profile` from Eclipse Equinox (`org.eclipse.osgi`) and is licensed under the Eclipse Public License 1.0, as stated in its header.
 
 ## Licenses of the included bundles
 

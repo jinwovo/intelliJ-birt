@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----------------------------------------------------------------------------
-Exception: render/java-modern.profile is a modified copy of a file from
-Eclipse Equinox (org.eclipse.osgi) and remains under the Eclipse Public
-License v1.0 (see licenses/EPL-1.0.html). Third-party components included in
-the release zips are listed in THIRD-PARTY-NOTICES.md.
